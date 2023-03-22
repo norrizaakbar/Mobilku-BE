@@ -42,7 +42,6 @@ class UserController {
       fs.writeFileSync(tmpFilePath1000, image1000);
       const result1000 = await cloudinary.uploader.upload(tmpFilePath1000, {
         public_id: "mobilku",
-        // buffer: image1000,
       });
 
       const post = await prisma.user.create({
@@ -59,13 +58,11 @@ class UserController {
 
       res.status(200).json({ message: "Success Create User", post });
     } catch (error) {
-      //   console.log(error);
       res.status(400).json({ error: error.message });
     }
   }
 
   static async getUser(req, res) {
-    // console.log("kepanggil");
     try {
       const user = await prisma.user.findUnique({
         where: {
@@ -131,7 +128,6 @@ class UserController {
         fs.writeFileSync(tmpFilePath1000, image1000);
         const result1000 = await cloudinary.uploader.upload(tmpFilePath1000, {
           public_id: "mobilku",
-          // buffer: image1000,
         });
         dataToUpdate.image500 = result500.secure_url;
         dataToUpdate.image1000 = result1000.secure_url;
